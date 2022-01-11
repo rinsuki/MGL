@@ -1,0 +1,17 @@
+name: Build
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macOS-11
+    steps:
+      - uses: actions/checkout@v2
+      - name: Clone External Repository
+        run: cd external && ./clone_external.sh
+      - name: Build & Install External Libraries
+        run: cd external && ./build_external.sh && ./install_external.sh
